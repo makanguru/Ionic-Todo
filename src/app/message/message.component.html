@@ -1,4 +1,9 @@
-<!--ion-item *ngIf="message" [routerLink]="'/message/' + message.id" [detail]="false"></ion-item-->
+<!--ion-item *ngIf="message" [routerLink]="'/message/' + message.id" [detail]="false"></ion-item
+
+(ionChange)="emplsChange($event.detail.checked, i)
+
+-->
+
 <ion-item>
     <ion-checkbox color="medium" [(ngModel)]="message.done" slot="start"></ion-checkbox>
     <ion-label>{{ message.subject }}</ion-label>
