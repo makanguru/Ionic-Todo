@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 export interface Message {
   fromName: string;
@@ -71,7 +72,7 @@ export class DataService {
     }
   ];
 
-  constructor() { }
+  constructor( private http: HttpClient ) { }
 
   public getMessages(): Message[] {
     return this.messages;
