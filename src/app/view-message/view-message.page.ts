@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService, Message } from '../services/data.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-view-message',
@@ -8,7 +8,8 @@ import { DataService, Message } from '../services/data.service';
   styleUrls: ['./view-message.page.scss'],
 })
 export class ViewMessagePage implements OnInit {
-  public message: Message;
+
+  public newTodo: string;
 
   constructor(
     private data: DataService,
@@ -16,8 +17,20 @@ export class ViewMessagePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    //const id = this.activatedRoute.snapshot.paramMap.get('id');
-    //this.message = this.data.getMessageById(parseInt(id, 10));
+
+  }
+
+  onSaveTodo(){
+    if(this.newTodo) {
+      const todo = {
+        subject: this.newTodo,
+        id: this.data.getRandomInt(1000000000000000),
+        done: false
+      };
+
+      this.data.addTodo(todo);
+      this.newTodo = '';
+    }
   }
 
   getBackButtonText() {

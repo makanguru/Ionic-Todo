@@ -5,22 +5,13 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-************
-<ion-content [fullscreen]="true" *ngIf="message">
+
+<ion-content [fullscreen]="true" >
   <ion-item>
-    <h1>{{ message.subject }}</h1>
-    <ion-icon name="person-circle" color="primary"></ion-icon>
-    <ion-label class="ion-text-wrap">
-      <h2>
+    <ion-label position="floating">Enter new todo</ion-label>
+    <ion-input [(ngModel)]="newTodo"></ion-input>
+    <ion-button color="medium" (click)='onSaveTodo()'>Save</ion-button>   
 
-        <span class="date">
-            <ion-checkbox color="tertiary"  slot="start"></ion-checkbox>
-        </span>
-      </h2>
-
-    </ion-label>
   </ion-item>
-  
-
 
 </ion-content>
