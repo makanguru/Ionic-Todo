@@ -2,13 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 //import { take, map, tap, delay, switchMap } from 'rxjs/operators';
-import { tap, take, switchMap } from 'rxjs/operators';
+import { tap, map, take, switchMap } from 'rxjs/operators';
 
-export interface Todo {
-  subject: string;
-  id: number;
-  done: boolean;
-}
+import { Todo } from '../todo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -88,17 +84,31 @@ export class DataService {
       return this.http.post('https://ionic-todo-22a1f.firebaseio.com/iontodo.json', todo )
       .pipe(
         tap(  resDat => {
-          console.log(resDat)
-        })
-        ).subscribe((res) => {
-          console.log("Adding todo name=", res)
+          console.log("Adding todo name=", resDat)
+        }))
+      .subscribe((res) => {
           this.todos.push(todo);
         });
   }
   
+  public fetchTodos() {
+    return this.http.get('https://ionic-todo-22a1f.firebaseio.com/iontodo.json')
+      .pipe(
+        map(  resDat => {
+          const todos = [];
+          for (const key in resDat) {
+            if (Object.prototype.hasOwnProperty.call(resDat, key)) {
+              todos.push(resDat[key]);
+              console.log("Get todos", resDat[key]);
+            }
+          }
+          return todos;          
+        })
+      );
+  }
+
   public getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
-  
 
 }

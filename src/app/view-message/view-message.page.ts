@@ -24,7 +24,7 @@ export class ViewMessagePage implements OnInit {
     if( this.newTodo ) {
       const todo = {
         subject: this.newTodo,
-        id: this.data.getRandomInt(1000000000000000),
+        id: this.data.getRandomInt(100000000000000000000),
         done: false
       };
 
