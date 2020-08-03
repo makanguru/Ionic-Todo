@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { DataService} from '../services/data.service';
 import { Todo } from '../todo.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -11,24 +9,19 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit, OnDestroy{
 
   todos: Todo[];
-  tmp: Todo = {
-    subject: 'ionViewWillEnter',
-    id: 1,
-    done: true
-  }
+  tmp: Todo = {subject: 'ionViewWillEnter', id: 1, done: true};
   isLoading = false;
-  private todoSub: Subscription;
+  timerId: any;
 
   constructor(private data: DataService) {}
 
-  
+
+
   ngOnInit(): void {
-//    this.todoSub = this.placesService.places.subscribe(places => {
-//      this.offers = places;
-//    });
+    this.timerId = setInterval(() => this.getTodos(), 2000);
   }
 
   refresh(ev) {
@@ -37,29 +30,28 @@ export class HomePage implements OnInit{
     }, 3000);
   }
 
-  //getTodos(): Todo[] {
-  //return this.data.getTodos();
 
   getTodosAs(): Todo[] {
     return this.todos;
   }
 
 
-  getTodos(tt: Todo) {
+  getTodos() {
     this.isLoading = true;
     this.data.fetchTodos().subscribe((res) => {
       this.isLoading = false;
       this.todos = res;
-      this.todos.push(tt);
     });
 
   }
 
   ionViewWillEnter() {
-    this.getTodos(this.tmp);
+    this.getTodos();
   }
 
-
+  ngOnDestroy() {  
+    clearInterval(this.timerId)
+  }
 
 
 }
