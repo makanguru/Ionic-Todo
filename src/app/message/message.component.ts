@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Todo } from '../services/data.service';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'app-message',

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+
 import { DataService } from '../services/data.service';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'app-view-message',
@@ -10,7 +13,7 @@ import { DataService } from '../services/data.service';
 export class ViewMessagePage implements OnInit {
 
   public newTodo: string;
-
+  
   constructor(
     private data: DataService,
     private activatedRoute: ActivatedRoute
@@ -28,7 +31,7 @@ export class ViewMessagePage implements OnInit {
         done: false
       };
 
-      this.data.addTodo(todo);
+      this.data.addTodo(todo).subscribe();
       this.newTodo = '';
     }
   }
@@ -38,4 +41,8 @@ export class ViewMessagePage implements OnInit {
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Inbox' : '';
   }
+
+
+
+
 }
