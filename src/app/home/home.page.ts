@@ -12,7 +12,6 @@ import { Todo } from '../todo.model';
 export class HomePage implements OnInit, OnDestroy{
 
   todos: Todo[];
-  tmp: Todo = {subject: 'ionViewWillEnter', id: 1, done: true};
   isLoading = false;
   timerId: any;
 
@@ -21,7 +20,7 @@ export class HomePage implements OnInit, OnDestroy{
 
 
   ngOnInit(): void {
-    this.timerId = setInterval(() => this.getTodos(), 2000);
+    this.timerId = setInterval(() => this.getTodos(), 10000);
   }
 
   refresh(ev) {

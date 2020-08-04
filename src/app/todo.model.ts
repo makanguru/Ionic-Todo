@@ -1,6 +1,6 @@
 export interface Todo {
     subject: string;
-    id: number;
+    ids: string;
     done: boolean;
 }
   

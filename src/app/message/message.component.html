@@ -5,6 +5,6 @@
 -->
 
 <ion-item>
-    <ion-checkbox color="medium" [(ngModel)]="todo.done" slot="start"></ion-checkbox>
+    <ion-checkbox color="medium" [(ngModel)]="todo.done" (click)="checkDone()" slot="start"></ion-checkbox>
     <ion-label class="body-hmr">{{ todo.subject }}</ion-label>
 </ion-item>

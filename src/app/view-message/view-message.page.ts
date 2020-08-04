@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 
 import { DataService } from '../services/data.service';
-import { Todo } from '../todo.model';
 
 @Component({
   selector: 'app-view-message',
   templateUrl: './view-message.page.html',
   styleUrls: ['./view-message.page.scss'],
 })
-export class ViewMessagePage implements OnInit {
+export class ViewMessagePage  {
 
   public newTodo: string;
   
@@ -19,15 +17,13 @@ export class ViewMessagePage implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-
-  }
 
   onSaveTodo(){
     if( this.newTodo ) {
       const todo = {
         subject: this.newTodo,
-        id: this.data.getRandomInt(100000000000000000000),
+        //ids: '' + this.data.getRandomInt(100000000000000000000),
+        ids: '',
         done: false
       };
 
@@ -41,8 +37,5 @@ export class ViewMessagePage implements OnInit {
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Inbox' : '';
   }
-
-
-
 
 }
